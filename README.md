@@ -1,4 +1,4 @@
-# Deep_Pager
+# Deep_Paging
 
 This program runs a Solr URL query, reads the document to find the 'nextCurserMark' attribute, uses that to create the next query, and so on until there are no more documents to retrieve.  
 
