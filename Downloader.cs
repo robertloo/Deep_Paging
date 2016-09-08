@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace Deep_Paging
+﻿namespace Deep_Paging
 {
     class Downloader
     {
@@ -14,7 +9,7 @@ namespace Deep_Paging
             public string LineMessage;
         }
 
-        public string baseAddress;
+        public string BaseAddress;
         public string SourceFolder; // this takes form label1.Text
         private int LinesCounted;  // you see this as LinesCounted
 
@@ -30,7 +25,7 @@ namespace Deep_Paging
 
             if (System.IO.Directory.Exists(SourceFolder) == false)
             {
-                throw new Exception("SourceFolder not specified.");
+                throw new System.Exception("SourceFolder not specified.");
             }
 
             //Creates results folder if it doesn't exist already
@@ -39,7 +34,7 @@ namespace Deep_Paging
             {
                 System.IO.Directory.CreateDirectory(path + "\\results");
             }
-          
+            
             while (cursorMark != nextCursorMark)
             {
                 if (worker.CancellationPending)
@@ -63,14 +58,14 @@ namespace Deep_Paging
                             try
                             {
                                 cursorMark = nextCursorMark;
-                                client.DownloadFile(baseAddress + "&cursorMark=" + cursorMark, dest);
+                                client.DownloadFile(BaseAddress + "&cursorMark=" + cursorMark, dest);
                             }
                             catch (System.Net.WebException exeption)
                             {
                                 state.LineMessage = exeption.Message
                                     + "\n" + exeption.InnerException.Message
                                     + "\nFollowing file was not found"
-                                    + "\n" + baseAddress + "&curserMark=" + cursorMark
+                                    + "\n" + BaseAddress + "&curserMark=" + cursorMark
                                     + "\nWill try again in 2 seconds";
 
                                 worker.ReportProgress(0, state);
